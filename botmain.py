@@ -21,6 +21,7 @@ def send_sms (chat, text):
     response = requests.post (url + 'sendMessage', data = params)
     return (response)
 
+
 #print (url)
 #print ()
 #chatid = get_chat_id(last_update(get_updates_json(url)))
@@ -34,11 +35,19 @@ def main():
     update_id = last_update(get_updates_json(url))['update_id']
     while True:
         if update_id == last_update(get_updates_json(url))['update_id']:
-            send_sms(get_chat_id(last_update(get_updates_json(url))), 'test')
+            #send_sms(get_chat_id(last_update(get_updates_json(url))), 'test') - отправка сообщения test
+            sms_text = last_update(get_updates_json(url))['message']['text'] #определяем текст входящего сообщения
+            #print = ('Here is inbound message: ' + sms_text)
+            send_sms(get_chat_id(last_update(get_updates_json(url))), sms_text) #отправляем его обратно адресату
             update_id +=1
+            #print (update_id)
         sleep(1)
 
-if __name__ == '__main__':
-    main()
-
-print ('Program shutdown...')
+if __name__ == '__main__':  
+    try:
+        main()
+        #print (str(last_update(get_updates_json(url))))
+        #print (str(last_update(get_updates_json(url)['text'])))
+    except KeyboardInterrupt:
+        print ('Program shutdown...')
+        exit()
