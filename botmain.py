@@ -29,7 +29,8 @@ def send_sms (chat, text):
 #print ('Here is response: ' + str(get_updates_json(url)))
 #print ('Here is chat ID:  ' + str(get_chat_id(last_update(get_updates_json(url)))))
 #print (last_update(get_updates_json(url)))
-#send_mess(chatid,'sms-ka test')
+#send_mess(chatid,'sms-ka test') #новый комментарий 
+#one more
 
 def main():
     update_id = last_update(get_updates_json(url))['update_id']
